@@ -8,6 +8,7 @@ import { Request, Response } from "express";
 import { connectDb } from "./db/config";
 import http from "http";
 import { Server } from "socket.io";
+import { UsersRouter } from "./routes/users";
 
 dotenv.config();
 
@@ -34,6 +35,7 @@ app.use(
     origin: "*",
   })
 );
+app.use("/user", UsersRouter);
 app.get("/", (req: Request, res: Response) => {
   res.status(200).send(`app is working`);
 });

@@ -16,6 +16,7 @@ export const SupplierSchema = new mongoose.Schema({
   contactPersonId: {
     type: String,
     required: [true, "An supplier should have a contact person ID"],
+    unique: true,
   },
   contactPersonBankDetails: {
     type: String,

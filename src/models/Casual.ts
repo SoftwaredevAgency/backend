@@ -8,6 +8,7 @@ export const CasualSchema = new mongoose.Schema({
   id: {
     type: String,
     required: [true, "Acasual must have an ID number"],
+    unique: true,
   },
   contact: {
     type: String,

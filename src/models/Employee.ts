@@ -8,6 +8,7 @@ export const EmployeeSchema = new mongoose.Schema({
   id: {
     type: String,
     required: [true, "An employee  must have an ID number"],
+    unique: true,
   },
   employeeNo: {
     type: String,
