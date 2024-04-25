@@ -51,9 +51,7 @@ const connectToDB = async () => {
       return null;
     }
     if (process.env.NODE_ENV === "remote") {
-      await connectDb(
-        process.env.REMOTE_MONGO ?? "mongodb://localhost:27017/B2C"
-      );
+      await connectDb(process.env.REMOTE_MONGO ?? process.env.REMOTE_MONGO);
       console.log("DB connected successfully! yes");
       httpServer.listen(process.env.PORT, () => {
         console.log(`Server up and running on ${process.env.PORT}`);
@@ -61,7 +59,7 @@ const connectToDB = async () => {
       return;
     }
 
-    await connectDb(process.env.MONGO ?? "mongodb://localhost:27017/B2C");
+    await connectDb(process.env.MONGO ?? process.env.REMOTE_MONGO);
     console.log("DB connected successfully");
     const used = process.memoryUsage();
     console.log(`Heap memory used ${JSON.stringify(used)}`);
