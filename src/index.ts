@@ -12,6 +12,7 @@ import { UsersRouter } from "./routes/users";
 import { verifyJwt } from "./middleware/verifyJwt";
 import { AuthRouter } from "./routes/auth";
 import { Auth } from "firebase-admin/lib/auth/auth";
+
 dotenv.config();
 
 export const app = express();
