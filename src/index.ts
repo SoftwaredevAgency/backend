@@ -9,7 +9,9 @@ import { connectDb } from "./db/config";
 import http from "http";
 import { Server } from "socket.io";
 import { UsersRouter } from "./routes/users";
-
+import { verifyJwt } from "./middleware/verifyJwt";
+import { AuthRouter } from "./routes/auth";
+import { Auth } from "firebase-admin/lib/auth/auth";
 dotenv.config();
 
 export const app = express();
@@ -35,10 +37,13 @@ app.use(
     origin: "*",
   })
 );
-app.use("/user", UsersRouter);
 app.get("/", (req: Request, res: Response) => {
   res.status(200).send(`app is working`);
 });
+app.use("/auth", AuthRouter);
+app.use(verifyJwt);
+app.use("/user", UsersRouter);
+
 const connectToDB = async () => {
   try {
     if (process.env.NODE_ENV === "test") {
@@ -46,8 +51,7 @@ const connectToDB = async () => {
     }
     if (process.env.NODE_ENV === "remote") {
       await connectDb(
-        process.env.REMOTE_MONGO ??
-          "mongodb+srv://nichlabs:4JsAR0yT34fUO1Iq@nichlabsapp.thoorlb.mongodb.net/?retryWrites=true&w=majority&appName=NichlabsApp"
+        process.env.REMOTE_MONGO ?? "mongodb://localhost:27017/B2C"
       );
       console.log("DB connected successfully! yes");
       httpServer.listen(process.env.PORT, () => {
@@ -56,10 +60,7 @@ const connectToDB = async () => {
       return;
     }
 
-    await connectDb(
-      process.env.MONGO ??
-        "mongodb+srv://nichlabs:4JsAR0yT34fUO1Iq@nichlabsapp.thoorlb.mongodb.net/?retryWrites=true&w=majority&appName=NichlabsApp"
-    );
+    await connectDb(process.env.MONGO ?? "mongodb://localhost:27017/B2C");
     console.log("DB connected successfully");
     const used = process.memoryUsage();
     console.log(`Heap memory used ${JSON.stringify(used)}`);

@@ -36,5 +36,5 @@ export const CasualSchema = new mongoose.Schema({
     type: String,
   },
 });
-const Casual = mongoose.model("User", CasualSchema);
+const Casual = mongoose.model("Casual", CasualSchema);
 export default Casual;

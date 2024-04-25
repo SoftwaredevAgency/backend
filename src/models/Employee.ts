@@ -23,5 +23,5 @@ export const EmployeeSchema = new mongoose.Schema({
     required: [true, "An employee should have a contact email"],
   },
 });
-const Employee = mongoose.model("User", EmployeeSchema);
+const Employee = mongoose.model("Employee", EmployeeSchema);
 export default Employee;

@@ -1,7 +1,8 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import Casual from "../models/Casual";
 import Employee from "../models/Employee";
 import Supplier from "../models/Supplier";
+import { AuthenticatedRequest as Request } from "../interfaces";
 
 export const registerCasual = async (req: Request, res: Response) => {
   try {
