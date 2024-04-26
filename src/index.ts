@@ -6,8 +6,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { Request, Response } from "express";
 import { connectDb } from "./db/config";
-import http from "http";
-import { Server } from "socket.io";
+// import http from "http";
+// import { Server } from "socket.io";
 import { UsersRouter } from "./routes/users";
 import { verifyJwt } from "./middleware/verifyJwt";
 import { AuthRouter } from "./routes/auth";
@@ -16,13 +16,13 @@ import { Auth } from "firebase-admin/lib/auth/auth";
 dotenv.config();
 
 export const app = express();
-const httpServer = http.createServer(app);
+// const httpServer = http.createServer(app);
 
-export const io = new Server(httpServer);
+// export const io = new Server(httpServer);
 
-io.on("connection", (socket) => {
-  socket.emit("newConnection", { message: "a new client connected" });
-});
+// io.on("connection", (socket) => {
+//   socket.emit("newConnection", { message: "a new client connected" });
+// });
 
 app.use(
   bodyParser.urlencoded({
@@ -53,7 +53,7 @@ const connectToDB = async () => {
     if (process.env.NODE_ENV === "remote") {
       await connectDb(process.env.REMOTE_MONGO ?? process.env.REMOTE_MONGO);
       console.log("DB connected successfully! yes");
-      httpServer.listen(process.env.PORT, () => {
+      app.listen(process.env.PORT, () => {
         console.log(`Server up and running on ${process.env.PORT}`);
       });
       return;
@@ -63,7 +63,7 @@ const connectToDB = async () => {
     console.log("DB connected successfully");
     const used = process.memoryUsage();
     console.log(`Heap memory used ${JSON.stringify(used)}`);
-    httpServer.listen(process.env.PORT, () => {
+    app.listen(process.env.PORT, () => {
       console.log(`Server up and running on ${process.env.PORT} `);
     });
   } catch (err: any) {
