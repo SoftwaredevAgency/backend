@@ -60,7 +60,7 @@ let paymentRequest: PaymentRequest = {
   PartyB: "254797168636",
   Remarks: "Thank you for working with us, you have received a payment",
   QueueTimeOutURL: "https://mydomain.com/b2c/queue",
-  ResultURL: "https://mydomain.com/b2c/result",
+  ResultURL: "https://mydomain.com/results",
   Occassion: "Supplier payment ",
 };
 
@@ -81,7 +81,7 @@ export const makeB2cRequest = async (req: Request, res: Response) => {
 
     res
       .status(200)
-      .json({ message: "Request sent successfully", data: response.data });
+      .json({ message: "Request sent for processing ", data: response.data });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });
