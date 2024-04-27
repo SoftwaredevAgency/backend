@@ -11,6 +11,7 @@ import { connectDb } from "./db/config";
 import { UsersRouter } from "./routes/users";
 import { verifyJwt } from "./middleware/verifyJwt";
 import { AuthRouter } from "./routes/auth";
+import { PaymentsRouter } from "./routes/payments";
 import { Auth } from "firebase-admin/lib/auth/auth";
 
 dotenv.config();
@@ -41,6 +42,7 @@ app.use(
 app.get("/", (req: Request, res: Response) => {
   res.status(200).send(`app is working`);
 });
+app.use("/payments", PaymentsRouter);
 app.use("/auth", AuthRouter);
 app.use(verifyJwt);
 app.use("/user", UsersRouter);

@@ -5,6 +5,7 @@
   "main": "dist/src/index.js",
   "scripts": {
     "dev": " NODE_OPTIONS=--experimental-specifier-resolution=node nodemon --exec  ts-node --esm src/index.ts",
+    "try": " NODE_OPTIONS=--experimental-specifier-resolution=node nodemon --exec  ts-node --esm src/controllers/payments/try.ts",
     "start": " tsc && node dist/index.js ",
     "test": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules npx jest  ",
     "start::remote": "NODE_ENV=remote tsc && node dist/index.js  ",
@@ -24,6 +25,7 @@
     "@types/jest": "^29.5.11",
     "@types/jsonwebtoken": "^9.0.3",
     "@types/supertest": "^2.0.15",
+    "@types/uuid": "^9.0.8",
     "babel-jest": "^29.7.0",
     "babel-plugin-transform-import-meta": "^2.2.1",
     "codegen.macro": "^4.1.0",
@@ -39,6 +41,7 @@
     "@apollo/server": "^4.9.5",
     "@babel/cli": "^7.23.4",
     "@babel/core": "^7.23.6",
+    "axios": "^1.6.8",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "bson": "^6.2.0",
@@ -52,6 +55,8 @@
     "mongoose": "^7.6.2",
     "request": "^2.88.2",
     "socket.io": "^4.7.4",
-    "twilio": "^4.18.1"
+    "twilio": "^4.18.1",
+    "unirest": "^0.6.0",
+    "uuid": "^9.0.1"
   }
 }
